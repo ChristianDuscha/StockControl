@@ -1,0 +1,2 @@
+# StockControl
+Eine Lagerverwaltungssoftware
