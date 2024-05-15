@@ -21,5 +21,10 @@ namespace StockControl
         {
             InitializeComponent();
         }
+
+        private void Profile_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

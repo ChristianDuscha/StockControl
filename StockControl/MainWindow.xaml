@@ -1,12 +1,71 @@
-﻿<Window x:Class="StockControl.MainWindow"
+﻿<Window x:Class="StockControl.MainWindow" Background="#131313"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StockControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="StockControl" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TabItem">
+            <Setter Property="Background" Value="#09A2E6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border" Background="#09A2E6" BorderBrush="Black" BorderThickness="1" CornerRadius="2,2,0,0" Padding="10,3,10,3">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#09A2E6"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="Gray"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="GdTabs">
+        <TabControl TabStripPlacement="Bottom" Margin="10" Background="#262626">
+            <TabItem Header="Lager anzeigen" Background="#09A2E6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="StockControl" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                        <Label Content="Guten Tag, Herr Mustermann" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                        <Image Source="/profile.png" MouseDown="Profile_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Lagername" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Standort" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Bestand" Width="*" Binding="{Binding }"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
