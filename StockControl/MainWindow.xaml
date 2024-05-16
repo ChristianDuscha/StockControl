@@ -20,10 +20,10 @@
                                 <Setter TargetName="Border" Property="Background" Value="#09A2E6"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="Gray"/>
+                                <Setter TargetName="Border" Property="Background" Value="#0672a2"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter Property="Foreground" Value="#0672a2"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -62,6 +62,106 @@
                             <DataGridTextColumn Header="Lagername" Width="*" Binding="{Binding }"/>
                             <DataGridTextColumn Header="Standort" Width="*" Binding="{Binding }"/>
                             <DataGridTextColumn Header="Bestand" Width="*" Binding="{Binding }"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Warenliste anzeigen" Background="#09A2E6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="StockControl" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                        <Label Content="Guten Tag, Herr Mustermann" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                        <Image Source="/profile.png" MouseDown="Profile_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Warenname" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Warentyp" Width="*" Binding="{Binding }"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Nutzerverwaltung" Background="#09A2E6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="StockControl" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                        <Label Content="Guten Tag, Herr Mustermann" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                        <Image Source="/profile.png" MouseDown="Profile_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Rolle" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Adresse" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Telefon" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="E-Mail" Width="*" Binding="{Binding }"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Lieferanten anzeigen" Background="#09A2E6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="StockControl" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                        <Label Content="Guten Tag, Herr Mustermann" FontSize="25" Background="#525252" Foreground="White" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                        <Image Source="/profile.png" MouseDown="Profile_Click"/>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Adresse" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Telefon" Width="*" Binding="{Binding }"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
