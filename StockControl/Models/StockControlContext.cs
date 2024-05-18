@@ -47,6 +47,8 @@ namespace StockControl.Models
 
                 entity.Property(e => e.Name).HasMaxLength(255);
 
+                entity.Property(e => e.Passwort).HasMaxLength(255);
+
                 entity.Property(e => e.Rolle).HasMaxLength(255);
 
                 entity.Property(e => e.Telefon).HasMaxLength(50);
@@ -69,13 +71,13 @@ namespace StockControl.Models
                 entity.HasOne(d => d.Benutzer)
                     .WithMany(p => p.Lagers)
                     .HasForeignKey(d => d.BenutzerId)
-                    .HasConstraintName("FK__Lager__BenutzerI__41EDCAC5");
+                    .HasConstraintName("FK__Lager__BenutzerI__7D0E9093");
             });
 
             modelBuilder.Entity<Lieferant>(entity =>
             {
                 entity.HasKey(e => e.LieferantenId)
-                    .HasName("PK__Lieferan__884AB852BE87CF4E");
+                    .HasName("PK__Lieferan__884AB852000AF507");
 
                 entity.ToTable("Lieferant");
 
@@ -91,7 +93,7 @@ namespace StockControl.Models
             modelBuilder.Entity<LieferantenWare>(entity =>
             {
                 entity.HasKey(e => new { e.LieferantenId, e.WarenId })
-                    .HasName("PK__Lieferan__EA93CEDC2BC9EF51");
+                    .HasName("PK__Lieferan__EA93CEDC099CA824");
 
                 entity.ToTable("Lieferanten_Ware");
 
@@ -107,13 +109,13 @@ namespace StockControl.Models
                     .WithMany(p => p.LieferantenWares)
                     .HasForeignKey(d => d.LieferantenId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Lieferant__Liefe__489AC854");
+                    .HasConstraintName("FK__Lieferant__Liefe__03BB8E22");
 
                 entity.HasOne(d => d.Waren)
                     .WithMany(p => p.LieferantenWares)
                     .HasForeignKey(d => d.WarenId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Lieferant__Waren__498EEC8D");
+                    .HasConstraintName("FK__Lieferant__Waren__04AFB25B");
             });
 
             modelBuilder.Entity<Waren>(entity =>

@@ -17,9 +17,12 @@ namespace StockControl
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        Benutzer currentUser;
+        public MainWindow(Benutzer user)
         {
             InitializeComponent();
+
+            currentUser = user;
         }
 
         private void Profile_Click(object sender, MouseButtonEventArgs e)

@@ -16,6 +16,7 @@ namespace StockControl.Models
         public string? Adresse { get; set; }
         public string? Telefon { get; set; }
         public string? Email { get; set; }
+        public string? Passwort { get; set; }
 
         public virtual ICollection<Lager> Lagers { get; set; }
     }
