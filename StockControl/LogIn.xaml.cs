@@ -25,9 +25,16 @@ namespace StockControl
         {
             InitializeComponent();
         }
-
+        
         private void Register_Click(object sender, RoutedEventArgs e)
         {
+            if (TbMail.Text == "")
+            {
+                MessageBox.Show("E-Mail Feld ist leer. Bitte eine E-Mail angeben.", "Register Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+
             Benutzer b = new()
             {
                 Rolle = "Mitarbeiter",
@@ -60,19 +67,33 @@ namespace StockControl
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            if (TbMail.Text == "")
+            {
+                MessageBox.Show("E-Mail Feld ist leer. Bitte eine E-Mail angeben.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             Benutzer? b = ctx.Benutzers.FirstOrDefault(x => x.Email == TbMail.Text);
 
-            if (b != null && b.Passwort == TbPw.Password)
+            if(b == null)
+            {
+                MessageBox.Show("Login fehlgeschlagen. Bitte erneut versuchen und bei mehrmaligem Misslingen neu registrieren", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (b.Passwort == TbPw.Password) 
             {
                 MainWindow mw = new(b);
 
+                MessageBox.Show("Login erfolgreich. StockControl wird nun gestartet.", "Login successful", MessageBoxButton.OK, MessageBoxImage.Information);
                 mw.Show();
                 this.Close();
-                MessageBox.Show("Login erfolgreich. StockControl wird nun gestartet.", "Login successful", MessageBoxButton.OK, MessageBoxImage.Information);
-
                 return;
             }
-            MessageBox.Show("Login fehlgeschlagen. Bitte erneut versuchen und bei mehrmaligem Misslingen neu registrieren", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                MessageBox.Show("Login fehlgeschlagen. Falsches Passwort.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
