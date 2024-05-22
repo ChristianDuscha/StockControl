@@ -30,11 +30,11 @@
         <TextBox x:Name="TbTel" Text="{Binding Telefon}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
 
         <Label Content="E-Mail:" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="25" Foreground="White" Margin="5"/>
-        <TextBox x:Name="TbMail" Text="{Binding Email}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
+        <TextBox x:Name="TbMail" IsReadOnly="True" Text="{Binding Email}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
 
         <Button Content="Passwort ändern" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="25" Background="#262626" Foreground="White" Margin="5" Click="Button_ClickChangePassword"/>
         <Button Content="Logout" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="25" Background="#262626" Foreground="White" Margin="5" Click="Button_ClickLogout"/>
 
-        <Button Content="Änderungen speichern" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="5" Grid.ColumnSpan="2" FontSize="25" Background="#262626" Foreground="White" Margin="5" Click="Button_Click"/>
+        <Button Content="Änderungen speichern" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="5" Grid.ColumnSpan="2" FontSize="25" Background="#262626" Foreground="White" Margin="5" Click="Button_ClickSave"/>
     </Grid>
 </Window>

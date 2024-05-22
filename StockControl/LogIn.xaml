@@ -21,19 +21,19 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Name:" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="25" Foreground="White" Margin="5"/>
-        <TextBox x:Name="TbName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
+        <TextBox x:Name="TbName" KeyDown="KeyDown_Enter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
         
         <Label Content="Adresse:" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0" FontSize="25" Foreground="White" Margin="5"/>
-        <TextBox x:Name="TbAd" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
+        <TextBox x:Name="TbAd" KeyDown="KeyDown_Enter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
 
         <Label Content="Telefon:" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="25" Foreground="White" Margin="5"/>
-        <TextBox x:Name="TbTel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
+        <TextBox x:Name="TbTel" KeyDown="KeyDown_Enter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
 
         <Label Content="E-Mail:" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="25" Foreground="White" Margin="5"/>
-        <TextBox x:Name="TbMail" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
+        <TextBox x:Name="TbMail" KeyDown="KeyDown_Enter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
     
         <Label Content="Passwort:" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="25" Foreground="White" Margin="5"/>
-        <PasswordBox x:Name="TbPw" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
+        <PasswordBox x:Name="TbPw" KeyDown="KeyDown_Enter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="25" Background="#393939" Foreground="White" Margin="5"/>
 
         <Button Content="Registrieren" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="0" FontSize="25" Background="#262626" Foreground="White" Margin="5" Click="Register_Click"/>
         <Button Content="Login" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="1" FontSize="25" Background="#262626" Foreground="White" Margin="5" Click="Login_Click"/>

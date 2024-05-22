@@ -21,23 +21,29 @@ namespace StockControl
     public partial class ChangePassword : Window
     {
         Benutzer user;
-        StockControlContext context;
-        public ChangePassword(Benutzer benutzerNeuesPW, StockControlContext ctx)
+        StockControlContext ctx;
+        public ChangePassword(Benutzer benutzerNeuesPW, StockControlContext context)
         {
             InitializeComponent();
             user = benutzerNeuesPW;
-            context = ctx;
+            this.ctx = context;
         }
 
         private void Button_ClickChangePasswort(object sender, RoutedEventArgs e)
         {
+            if(PwCurr.Password == "" || PwN1.Password == "" || PwN2.Password == "")
+            {
+                MessageBox.Show("Kein Feld darf leer sein. Bitte erneut versuchen", "Empty Field Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (user.Passwort == PwCurr.Password)
             {
-                if (PwN1.Password == PWN2.Password) 
+                if (PwN1.Password == PwN2.Password) 
                 {
-                    user.Passwort = PwN1.Password;
+                    ctx.Benutzers.FirstOrDefault(x => x.Passwort == PwCurr.Password).Passwort = PwN1.Password;
                     MessageBox.Show("Passwort erfolgreich geändert.", "Password successfully changed", MessageBoxButton.OK, MessageBoxImage.Information);
-                    context.SaveChanges();
+                    ctx.SaveChanges();
                 }
                 else
                 {

@@ -22,21 +22,21 @@ namespace StockControl
     {
         MainWindow mw;
         Benutzer currentUser;
-        StockControlContext context;
-        public UserInformation(Benutzer selectedUser, MainWindow mw, StockControlContext ctx)
+        StockControlContext ctx;
+        public UserInformation(Benutzer selectedUser, MainWindow mw, StockControlContext context)
         {
             InitializeComponent();
             currentUser = selectedUser;
             DataContext = currentUser;
             this.mw = mw;
-            context = ctx;
+            this.ctx = context;
         }
 
         private void Button_ClickChangePassword(object sender, RoutedEventArgs e)
         {
-            ChangePassword cp = new ChangePassword(currentUser, context);
+            ChangePassword cp = new ChangePassword(currentUser, ctx);
             cp.ShowDialog();
-            context.SaveChanges();
+            ctx.SaveChanges();
         }
 
         private void Button_ClickLogout(object sender, RoutedEventArgs e)
@@ -48,9 +48,18 @@ namespace StockControl
             logIn.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_ClickSave(object sender, RoutedEventArgs e)
         {
-            context.SaveChanges();
+            if(TbName.Text == "" || TbAd.Text == "" || TbTel.Text == "")
+            {
+                MessageBox.Show("Kein Feld darf leer sein. Bitte erneut versuchen", "Empty Field Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            Benutzer? b = ctx.Benutzers.FirstOrDefault(x => x.Email == TbMail.Text);
+            b.Name = TbName.Text;
+            b.Adresse = TbAd.Text;
+            b.Telefon = TbTel.Text;
+            ctx.SaveChanges();
         }
     }
 }

@@ -95,5 +95,13 @@ namespace StockControl
                 MessageBox.Show("Login fehlgeschlagen. Falsches Passwort.", "Login Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void KeyDown_Enter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Login_Click(null, null);
+            }
+        }
     }
 }
