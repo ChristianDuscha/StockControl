@@ -7,6 +7,35 @@
         mc:Ignorable="d"
         Title="StockControl" Height="450" Width="800">
     <Window.Resources>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#3E3E42"/>
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#3E3E42"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#3E3E42"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RowStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#2D2D30"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#3E3E42"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#1E1E1E"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="TabItem">
             <Setter Property="Background" Value="#09A2E6"/>
             <Setter Property="Template">
@@ -38,6 +67,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -57,13 +87,15 @@
                         <Image Source="/profile.png" MouseDown="Profile_Click"/>
                     </StackPanel>
 
-                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                    <DataGrid x:Name="DgLager" Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Lagername" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Standort" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Bestand" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Lagername" Width="*" Binding="{Binding Lagername}"/>
+                            <DataGridTextColumn Header="Standort" Width="*" Binding="{Binding Standort}"/>
+                            <DataGridTextColumn Header="Bestand" Width="*" Binding="{Binding Bestand}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Warenliste anzeigen" Background="#09A2E6">
@@ -71,6 +103,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -90,12 +123,15 @@
                         <Image Source="/profile.png" MouseDown="Profile_Click"/>
                     </StackPanel>
 
-                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                    <DataGrid x:Name="DgWaren" Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Warenname" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Warentyp" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Warenname" Width="*" Binding="{Binding Warennamen}"/>
+                            <DataGridTextColumn Header="Warentyp" Width="*" Binding="{Binding Warentyp}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Nutzerverwaltung" Background="#09A2E6">
@@ -103,6 +139,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -122,22 +159,26 @@
                         <Image Source="/profile.png" MouseDown="Profile_Click"/>
                     </StackPanel>
 
-                    <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
+                    <DataGrid x:Name="DgNutzer" Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Rolle" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Adresse" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Telefon" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="E-Mail" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Rolle" Width="Auto" Binding="{Binding Rolle}"/>
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Adresse" Width="*" Binding="{Binding Adresse}"/>
+                            <DataGridTextColumn Header="Telefon" Width="Auto" Binding="{Binding Telefon}"/>
+                            <DataGridTextColumn Header="E-Mail" Width="*" Binding="{Binding Email}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+
                 </Grid>
             </TabItem>
-            <TabItem Header="Lieferanten anzeigen" Background="#09A2E6">
+            <TabItem x:Name="DgLiefer" Header="Lieferanten anzeigen" Background="#09A2E6">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -159,11 +200,14 @@
 
                     <DataGrid Grid.Row="1" Grid.ColumnSpan="3" Margin="5" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding }" FontSize="15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Adresse" Width="*" Binding="{Binding }"/>
-                            <DataGridTextColumn Header="Telefon" Width="*" Binding="{Binding }"/>
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Adresse" Width="*" Binding="{Binding Adresse}"/>
+                            <DataGridTextColumn Header="Telefon" Width="*" Binding="{Binding Telefon}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+
                 </Grid>
             </TabItem>
         </TabControl>

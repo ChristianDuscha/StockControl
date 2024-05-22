@@ -26,8 +26,14 @@ namespace StockControl.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=QRIZZPC\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
+                if (System.Security.Principal.WindowsIdentity.GetCurrent().Name.Contains("CHRISTIA-LAPTOP")) //Quelle: https://stackoverflow.com/questions/1240373/how-do-i-get-the-current-username-in-net-using-c
+                {
+                    optionsBuilder.UseSqlServer("Data Source=CHRISTIA-LAPTOP\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
+                }
+                else
+                {
+                    optionsBuilder.UseSqlServer("Data Source=QRIZZPC\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
+                }
             }
         }
 
