@@ -28,13 +28,13 @@ namespace StockControl
         
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            if (TbMail.Text == "")
+            if (TbName.Text == "" || TbAd.Text == "" || TbTel.Text == "" || TbMail.Text == "" || TbPw.Password == "")
             {
-                MessageBox.Show("E-Mail Feld ist leer. Bitte eine E-Mail angeben.", "Register Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Es dürfen keine Felder leer sind, um sich zu registrieren. Bitte erneut versuchen.", "Register Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-
+            //Neue Nutzer werden immer der Rolle "Mitarbeiter" zugewiesen, ein Admin kann die Rollen in der Nutzerverwaltungsballe ändern
             Benutzer b = new()
             {
                 Rolle = "Mitarbeiter",

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -26,13 +28,25 @@ namespace StockControl.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                if (System.Security.Principal.WindowsIdentity.GetCurrent().Name.Contains("CHRISTIA-LAPTOP")) //Quelle: https://stackoverflow.com/questions/1240373/how-do-i-get-the-current-username-in-net-using-c
+                string connectionString = "";
+                try
                 {
-                    optionsBuilder.UseSqlServer("Data Source=CHRISTIA-LAPTOP\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
+                    connectionString = File.ReadAllText("../../../connection.txt");
+                }
+                catch
+                {
+                    MessageBox.Show("Fehler beim Zugriff des Connection-Strings", "Connection string error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (connectionString == "")
+                {
+                    //Standard Connection String
+                    optionsBuilder.UseSqlServer("Data Source=QRIZZPC\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
                 }
                 else
                 {
-                    optionsBuilder.UseSqlServer("Data Source=QRIZZPC\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
+                    optionsBuilder.UseSqlServer("Data Source=" + connectionString + ";Initial Catalog=StockControl;Integrated Security=SSPI");
                 }
             }
         }
@@ -57,7 +71,7 @@ namespace StockControl.Models
 
                 entity.Property(e => e.Rolle).HasMaxLength(255);
 
-                entity.Property(e => e.Telefon).HasMaxLength(50);
+                entity.Property(e => e.Telefon).HasMaxLength(255);
             });
 
             modelBuilder.Entity<Lager>(entity =>
@@ -77,13 +91,13 @@ namespace StockControl.Models
                 entity.HasOne(d => d.Benutzer)
                     .WithMany(p => p.Lagers)
                     .HasForeignKey(d => d.BenutzerId)
-                    .HasConstraintName("FK__Lager__BenutzerI__7D0E9093");
+                    .HasConstraintName("FK__Lager__BenutzerI__02925FBF");
             });
 
             modelBuilder.Entity<Lieferant>(entity =>
             {
                 entity.HasKey(e => e.LieferantenId)
-                    .HasName("PK__Lieferan__884AB852000AF507");
+                    .HasName("PK__Lieferan__884AB8526E462E20");
 
                 entity.ToTable("Lieferant");
 
@@ -99,7 +113,7 @@ namespace StockControl.Models
             modelBuilder.Entity<LieferantenWare>(entity =>
             {
                 entity.HasKey(e => new { e.LieferantenId, e.WarenId })
-                    .HasName("PK__Lieferan__EA93CEDC099CA824");
+                    .HasName("PK__Lieferan__EA93CEDC6DC614C6");
 
                 entity.ToTable("Lieferanten_Ware");
 
@@ -115,13 +129,13 @@ namespace StockControl.Models
                     .WithMany(p => p.LieferantenWares)
                     .HasForeignKey(d => d.LieferantenId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Lieferant__Liefe__03BB8E22");
+                    .HasConstraintName("FK__Lieferant__Liefe__093F5D4E");
 
                 entity.HasOne(d => d.Waren)
                     .WithMany(p => p.LieferantenWares)
                     .HasForeignKey(d => d.WarenId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Lieferant__Waren__04AFB25B");
+                    .HasConstraintName("FK__Lieferant__Waren__0A338187");
             });
 
             modelBuilder.Entity<Waren>(entity =>
