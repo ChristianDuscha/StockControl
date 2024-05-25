@@ -35,17 +35,17 @@ namespace StockControl.Models
                 }
                 catch
                 {
-                    MessageBox.Show("Fehler beim Zugriff des Connection-Strings", "Connection string error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                if (connectionString == "")
+                if (connectionString == null || connectionString == "")
                 {
                     //Standard Connection String
-                    optionsBuilder.UseSqlServer("Data Source=QRIZZPC\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
+                    optionsBuilder.UseSqlServer("Data Source=LAPTOP-CHRISTIA\\SQLEXPRESS;Initial Catalog=StockControl;Integrated Security=SSPI");
                 }
                 else
                 {
+                    //Connection String aus der Datei gelesen
                     optionsBuilder.UseSqlServer("Data Source=" + connectionString + ";Initial Catalog=StockControl;Integrated Security=SSPI");
                 }
             }

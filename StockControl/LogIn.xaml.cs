@@ -24,8 +24,28 @@ namespace StockControl
         public LogIn()
         {
             InitializeComponent();
+
+            if (!DatabaseIsConnected())
+            {
+                MessageBox.Show("Fehler bei der Datenbankverbindung. Eventuell müssen Sie den Connection-String überprüfen.", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+                return;
+            }
         }
-        
+
+        private bool DatabaseIsConnected()
+        {
+            try
+            {
+                Benutzer b = ctx.Benutzers.First();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void Register_Click(object sender, RoutedEventArgs e)
         {
             if (TbName.Text == "" || TbAd.Text == "" || TbTel.Text == "" || TbMail.Text == "" || TbPw.Password == "")
