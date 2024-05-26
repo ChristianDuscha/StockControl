@@ -138,26 +138,53 @@ namespace StockControl
 
         private void Button_ClickDelSelectedItem(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.Height.ToString());
             foreach (TabItem TabItem in Tabs.Items)
             {
                 if (TabItem.IsSelected)
                 {
                     if (TabItem.Name.Contains("Lager"))
                     {
-                        ctx.Remove(DgLager.SelectedItem);
+                        try
+                        {
+                            ctx.Remove(DgLager.SelectedItem);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an","Data Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     else if (TabItem.Name.Contains("Waren"))
                     {
-                        ctx.Remove(DgWaren.SelectedItem);
+                        try
+                        {
+                            ctx.Remove(DgWaren.SelectedItem);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     else if (TabItem.Name.Contains("Nutzer"))
                     {
-                        ctx.Remove(DgNutzer.SelectedItem);
+                        try
+                        {
+                            ctx.Remove(DgNutzer.SelectedItem);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }                        
                     }
                     else if (TabItem.Name.Contains("Liefer"))
                     {
-                        ctx.Remove(DgLiefer.SelectedItem);
+                        try
+                        {
+                            ctx.Remove(DgLiefer.SelectedItem);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
 
                     ctx.SaveChanges();
