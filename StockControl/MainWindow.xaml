@@ -133,7 +133,6 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Warenname" Width="*" Binding="{Binding Warennamen}"/>
                             <DataGridTextColumn Header="Warentyp" Width="*" Binding="{Binding Warentyp}"/>
-                            <DataGridTextColumn Header="Preis" Width="*" Binding="{Binding LieferantenWares/Preis}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 

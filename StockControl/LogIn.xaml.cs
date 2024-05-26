@@ -54,7 +54,7 @@ namespace StockControl
                 return;
             }
 
-            //Neue Nutzer werden immer der Rolle "Mitarbeiter" zugewiesen, ein Admin kann die Rollen in der Nutzerverwaltungsballe ändern
+            //Neue Nutzer werden immer der Rolle "Mitarbeiter" zugewiesen, ein Admin kann die Rollen in der Nutzerverwaltungstabelle ändern
             Benutzer b = new()
             {
                 Rolle = "Mitarbeiter",

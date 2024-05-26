@@ -37,11 +37,18 @@ namespace StockControl
                 return;
             }
 
-            if (user.Passwort == PwCurr.Password)
+            Benutzer? currentUser = ctx.Benutzers.FirstOrDefault(x => x.Email == user.Email);
+            if(currentUser == null)
+            {
+                MessageBox.Show("Fehler beim Suchen Ihres Benutzers. Bitte erneut versuchen", "Database Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (currentUser.Passwort == PwCurr.Password)
             {
                 if (PwN1.Password == PwN2.Password) 
                 {
-                    ctx.Benutzers.FirstOrDefault(x => x.Passwort == PwCurr.Password).Passwort = PwN1.Password;
+                    currentUser.Passwort = PwN1.Password;
                     MessageBox.Show("Passwort erfolgreich geändert.", "Password successfully changed", MessageBoxButton.OK, MessageBoxImage.Information);
                     ctx.SaveChanges();
                 }

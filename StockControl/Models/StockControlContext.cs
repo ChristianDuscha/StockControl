@@ -31,7 +31,7 @@ namespace StockControl.Models
                 string connectionString = "";
                 try
                 {
-                    connectionString = File.ReadAllText("../../../connection.txt");
+                    connectionString = File.ReadAllText("../../../../connection.txt");
                 }
                 catch
                 {

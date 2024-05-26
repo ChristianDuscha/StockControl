@@ -44,7 +44,7 @@ namespace StockControl
 
             string greeting = "";
 
-            if (now.Hour >= 5 && now.Hour < 12)
+            if (now.Hour >= 6 && now.Hour < 12)
             {
                 greeting = "Guten Morgen, ";
             }
@@ -52,7 +52,7 @@ namespace StockControl
             {
                 greeting = "Guten Mittag, ";
             }
-            if (now.Hour >= 18 && now.Hour < 5)
+            if (now.Hour >= 18 || now.Hour < 4)
             {
                 greeting = "Guten Abend, ";
             }
@@ -85,7 +85,7 @@ namespace StockControl
             DisplayViewLager = CollectionViewSource.GetDefaultView(ctx.Lagers.Local.ToObservableCollection());
             DgLager.DataContext = DisplayViewLager;
 
-            ctx.Warens.Include(x => x.LieferantenWares).Load();
+            ctx.Warens.Load();
             DisplayViewWare = CollectionViewSource.GetDefaultView(ctx.Warens.Local.ToObservableCollection());
             DgWaren.DataContext = DisplayViewWare;
 
@@ -106,12 +106,12 @@ namespace StockControl
             {
                 DisplayViewNutzer.Filter = null;
             }
-            else if (currentUser.Rolle == "Mitarbeiter")
+            else
             {
                 DisplayViewNutzer.Filter = x =>
                 {
                     Benutzer? benutzer = x as Benutzer;
-                    return benutzer != null && benutzer.Rolle == "Mitarbeiter";
+                    return benutzer != null && benutzer.Rolle != "Admin";
                 };
             }
         }
@@ -151,6 +151,7 @@ namespace StockControl
                         catch
                         {
                             MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an","Data Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
                         }
                     }
                     else if (TabItem.Name.Contains("Waren"))
@@ -162,6 +163,7 @@ namespace StockControl
                         catch
                         {
                             MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
                         }
                     }
                     else if (TabItem.Name.Contains("Nutzer"))
@@ -173,6 +175,7 @@ namespace StockControl
                         catch
                         {
                             MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
                         }                        
                     }
                     else if (TabItem.Name.Contains("Liefer"))
@@ -184,11 +187,11 @@ namespace StockControl
                         catch
                         {
                             MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
                         }
                     }
 
                     ctx.SaveChanges();
-                    return;
                 }
             }
         }
@@ -312,7 +315,7 @@ namespace StockControl
 
             try
             {
-                datei.SaveAs($"../../../{dateiName}.xlsx");
+                datei.SaveAs($"../../../../{dateiName}.xlsx");
             }
             catch (Exception e)
             {
@@ -320,7 +323,7 @@ namespace StockControl
                 return;
             }
 
-            MessageBox.Show($"Daten erfolgreich als {dateiName} gespeichert!", "Export successful", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show($"Daten erfolgreich als \"{dateiName}.xlsx\" gespeichert!", "Export successful", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
