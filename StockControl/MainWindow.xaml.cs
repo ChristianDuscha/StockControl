@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClosedXML.Excel;
 using Microsoft.EntityFrameworkCore;
 using StockControl.Models;
 
@@ -65,12 +67,9 @@ namespace StockControl
 
         private void InitAdminView()
         {
-            if(currentUser.Rolle != "Admin")
+            if (currentUser.Rolle != "Admin")
             {
-                DgLager.IsReadOnly = true;
-                DgWaren.IsReadOnly = true;
                 DgNutzer.IsReadOnly = true;
-                DgLiefer.IsReadOnly = true;
                 return;
             }
 
@@ -86,7 +85,7 @@ namespace StockControl
             DisplayViewLager = CollectionViewSource.GetDefaultView(ctx.Lagers.Local.ToObservableCollection());
             DgLager.DataContext = DisplayViewLager;
 
-            ctx.Warens.Include(x=> x.LieferantenWares).Load();
+            ctx.Warens.Include(x => x.LieferantenWares).Load();
             DisplayViewWare = CollectionViewSource.GetDefaultView(ctx.Warens.Local.ToObservableCollection());
             DgWaren.DataContext = DisplayViewWare;
 
@@ -126,7 +125,15 @@ namespace StockControl
 
         private void Button_ClickSave(object sender, RoutedEventArgs e)
         {
-            ctx.SaveChanges();
+            try
+            {
+                ctx.SaveChanges();
+                MessageBox.Show("Änderungen erfolgreich gespeichert", "Save successful", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Fehler beim Speichern. Bitte Ihre Daten überprüfen und erneut versuchen.", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Button_ClickDelSelectedItem(object sender, RoutedEventArgs e)
@@ -148,7 +155,7 @@ namespace StockControl
                     {
                         ctx.Remove(DgNutzer.SelectedItem);
                     }
-                    else  if (TabItem.Name.Contains("Liefer"))
+                    else if (TabItem.Name.Contains("Liefer"))
                     {
                         ctx.Remove(DgLiefer.SelectedItem);
                     }
@@ -157,6 +164,136 @@ namespace StockControl
                     return;
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ExportDataToExcel();
+        }
+
+        private void ExportDataToExcel()
+        {
+            var datei = new XLWorkbook();
+            IXLWorksheet blatt;
+            string dateiName = "";
+
+            if (TabLager.IsSelected)
+            {
+                dateiName = "Lagerdaten";
+
+                blatt = datei.Worksheets.Add("Lager");
+
+                blatt.Cell(1, 1).Value = "Lagername";
+                blatt.Cell(1, 2).Value = "Standort";
+                blatt.Cell(1, 3).Value = "Bestand";
+
+                var lagerZeilen = ctx.Lagers.Local.ToObservableCollection();
+
+                if (lagerZeilen.Count<= 0) 
+                {
+                    MessageBox.Show("Keine Daten zum Exportieren vorhanden.", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                for (int i = 0; i < lagerZeilen.Count; i++)
+                {
+                    blatt.Cell(i + 2, 1).Value = lagerZeilen[i].Lagername;
+                    blatt.Cell(i + 2, 2).Value = lagerZeilen[i].Standort;
+                    blatt.Cell(i + 2, 3).Value = lagerZeilen[i].Bestand;
+                }
+            }
+            else if (TabWaren.IsSelected)
+            {
+                dateiName = "Warendaten";
+
+                blatt = datei.Worksheets.Add("Waren");
+
+                blatt.Cell(1, 1).Value = "Warennamen";
+                blatt.Cell(1, 2).Value = "Warentyp";
+
+                var warenZeilen = ctx.Warens.Local.ToObservableCollection();
+
+                if (warenZeilen.Count <= 0)
+                {
+                    MessageBox.Show("Keine Daten zum Exportieren vorhanden.", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                for (int i = 0; i < warenZeilen.Count; i++)
+                {
+                    blatt.Cell(i + 2, 1).Value = warenZeilen[i].Warennamen;
+                    blatt.Cell(i + 2, 2).Value = warenZeilen[i].Warentyp;
+                }
+            }
+            else if (TabNutzer.IsSelected)
+            {
+                dateiName = "Nutzerdaten";
+
+                blatt = datei.Worksheets.Add("Nutzer");
+
+                blatt.Cell(1, 1).Value = "Rolle";
+                blatt.Cell(1, 2).Value = "Name";
+                blatt.Cell(1, 3).Value = "Adresse";
+                blatt.Cell(1, 4).Value = "Telefon";
+                blatt.Cell(1, 5).Value = "Email";
+
+                var nutzerZeilen = ctx.Benutzers.Local.ToObservableCollection();
+
+                if (nutzerZeilen.Count <= 0)
+                {
+                    MessageBox.Show("Keine Daten zum Exportieren vorhanden.", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                for (int i = 0; i < nutzerZeilen.Count; i++)
+                {
+                    blatt.Cell(i + 2, 1).Value = nutzerZeilen[i].Rolle;
+                    blatt.Cell(i + 2, 2).Value = nutzerZeilen[i].Name;
+                    blatt.Cell(i + 2, 3).Value = nutzerZeilen[i].Adresse;
+                    blatt.Cell(i + 2, 4).Value = nutzerZeilen[i].Telefon;
+                    blatt.Cell(i + 2, 5).Value = nutzerZeilen[i].Email;
+                }
+            }
+            else if (TabLiefer.IsSelected)
+            {
+                dateiName = "Lieferantendaten";
+
+                blatt = datei.Worksheets.Add("Lieferanten");
+
+                blatt.Cell(1, 1).Value = "Name";
+                blatt.Cell(1, 2).Value = "Adresse";
+                blatt.Cell(1, 3).Value = "Telefon";
+
+                var lieferentenZeilen = ctx.Lieferants.Local.ToObservableCollection();
+
+                if (lieferentenZeilen.Count <= 0)
+                {
+                    MessageBox.Show("Keine Daten zum Exportieren vorhanden.", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                for (int i = 0; i < lieferentenZeilen.Count; i++)
+                {
+                    blatt.Cell(i + 2, 1).Value = lieferentenZeilen[i].Name;
+                    blatt.Cell(i + 2, 2).Value = lieferentenZeilen[i].Adresse;
+                    blatt.Cell(i + 2, 3).Value = lieferentenZeilen[i].Telefon;
+                }
+            }
+
+            DateTime now = DateTime.Now;
+            dateiName += $"_{now.Day}-{now.Month}-{now.Year}_{now.Hour}-{now.Minute}-{now.Second}";
+
+            try
+            {
+                datei.SaveAs($"../../../{dateiName}.xlsx");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Fehler beim Exportieren der Daten: " + e.ToString().Substring(0, 50), "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            MessageBox.Show($"Daten erfolgreich als {dateiName} gespeichert!", "Export successful", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

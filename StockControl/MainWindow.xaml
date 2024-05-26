@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StockControl"
         mc:Ignorable="d"
-        Title="StockControl" Height="515" Width="800">
+        Title="StockControl" Height="560" Width="800">
     <Window.Resources>
         <Style TargetType="DataGrid">
             <Setter Property="Background" Value="#2D2D30"/>
@@ -69,6 +69,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -96,8 +97,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Augewählten Datensatz löschen" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
-                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+                    <Button Content="Daten exportieren" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_Click"/>
+
+                    <Button Content="Ausgewählten Datensatz löschen" Grid.Row="4" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
+                    <Button Content="Änderungen speichern" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TabWaren" Header="Warenliste anzeigen" Background="#09A2E6">
@@ -105,6 +108,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -133,8 +137,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Augewählten Datensatz löschen" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
-                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+                    <Button Content="Daten exportieren" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_Click"/>
+
+                    <Button Content="Ausgewählten Datensatz löschen" Grid.Row="4" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
+                    <Button Content="Änderungen speichern" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TabNutzer" Header="Nutzerverwaltung" Background="#09A2E6">
@@ -142,6 +148,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -172,8 +179,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Augewählten Datensatz löschen" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
-                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+                    <Button Content="Daten exportieren" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_Click"/>
+
+                    <Button Content="Ausgewählten Datensatz löschen" Grid.Row="4" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
+                    <Button Content="Änderungen speichern" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="TabLiefer" Header="Lieferanten anzeigen" Background="#09A2E6">
@@ -181,6 +190,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
+                        <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -209,8 +219,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <Button Content="Augewählten Datensatz löschen" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
-                    <Button Content="Änderungen speichern" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
+                    <Button Content="Daten exportieren" Grid.Row="2" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_Click"/>
+
+                    <Button Content="Ausgewählten Datensatz löschen" Grid.Row="4" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickDelSelectedItem"/>
+                    <Button Content="Änderungen speichern" Grid.Row="3" Grid.ColumnSpan="3" Margin="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Foreground="White" Background="#262626" Click="Button_ClickSave"/>
                 </Grid>
             </TabItem>
         </TabControl>
