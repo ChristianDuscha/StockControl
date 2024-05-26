@@ -121,6 +121,8 @@ namespace StockControl
             UserInformation userInformation = new UserInformation(currentUser, this, ctx);
 
             userInformation.Show();
+
+            InitGreeting();
         }
 
         private void Button_ClickSave(object sender, RoutedEventArgs e)
@@ -168,6 +170,12 @@ namespace StockControl
                     }
                     else if (TabItem.Name.Contains("Nutzer"))
                     {
+                        Benutzer b = (Benutzer)DgNutzer.SelectedItem;
+                        if (currentUser.Email == b.Email)
+                        {
+                            MessageBox.Show("Bitte versuchen Sie nicht, Ihren eigenen Benutzer zu löschen", "Del Own User Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
                         try
                         {
                             ctx.Remove(DgNutzer.SelectedItem);
@@ -190,7 +198,7 @@ namespace StockControl
                             return;
                         }
                     }
-
+                    MessageBox.Show("Löschen des ausgewählten Datensatzes erfolgreich", "Deletion successful", MessageBoxButton.OK, MessageBoxImage.Error);
                     ctx.SaveChanges();
                 }
             }

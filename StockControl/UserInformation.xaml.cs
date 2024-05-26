@@ -59,6 +59,9 @@ namespace StockControl
             b.Name = TbName.Text;
             b.Adresse = TbAd.Text;
             b.Telefon = TbTel.Text;
+
+            MessageBox.Show("Daten erfolgreich geändert.", "Data successfully changed", MessageBoxButton.OK, MessageBoxImage.Information);
+
             ctx.SaveChanges();
         }
     }
