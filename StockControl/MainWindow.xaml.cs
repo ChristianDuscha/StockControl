@@ -170,21 +170,22 @@ namespace StockControl
                     }
                     else if (TabItem.Name.Contains("Nutzer"))
                     {
-                        Benutzer b = (Benutzer)DgNutzer.SelectedItem;
-                        if (currentUser.Email == b.Email)
-                        {
-                            MessageBox.Show("Bitte versuchen Sie nicht, Ihren eigenen Benutzer zu löschen", "Del Own User Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
                         try
                         {
+                            Benutzer b = (Benutzer)DgNutzer.SelectedItem;
+                            if (currentUser.Email == b.Email)
+                            {
+                                MessageBox.Show("Bitte versuchen Sie nicht, Ihren eigenen Benutzer zu löschen", "Del Own User Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+
+                            }
                             ctx.Remove(DgNutzer.SelectedItem);
                         }
                         catch
                         {
                             MessageBox.Show("Bitte wählen Sie einen gültigen Datensatz an", "Data Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
-                        }                        
+                        }                    
                     }
                     else if (TabItem.Name.Contains("Liefer"))
                     {
